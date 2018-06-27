@@ -1,83 +1,81 @@
 <template>
-    <article :id="id">
-        <h2>{{ title }}</h2>
+<div :id="id">
+    <h1> {{title}} </h1>
+    <p v-if="isKidsEvent">Show this only if it's a kids event</p>
+    {{heading}}
 
-        <p v-if="isKidsEvent">
-            Show this only if it is a kid's event!
-        </p>
-
-        {{ content }}
-
-
-        <h3>Comments</h3>
+    {{isKidsEvent}}
+    <p>{{content}}</p>
+    <h3>Comments</h3>
+    
         <button v-if="!showComments"
                 v-on:click="toggleCommentSection">Show Comments</button>
         <section class="comments" v-if="showComments === true">
-            {{ comments }}
-        </section>
-    </article>
+        {{comments}}
+    </section>
+    </div>
 </template>
-
 <script>
 export default {
-  name: 'post',
-
-  computed: {
-    isKidsEvent() {
-      if (this.audience === 'kids' && this.type === 'event') {
-        return true;
-      } else {
-        return false;
-      }
-    }
-  },
-
-  data: () => {
-    return {
-      heading: 'HelloooOoo',
-      showComments: false,
-      comments: [],
-    };
-  },
-
-  methods: {
-    getCommentFromWordPress() {
-      // 1. Reaching out to an api
-      // 2. Getting the post from that call
-      const commentFromAPI = {
-        id: 3,
-        comment: 'balh blah lah',
-      };
-
-      // 3. Inserting the post into data ^.
-
-      this.comments.push(commentFromAPI);
+    data: () => {
+        return {
+            heading: 'HEEEEELPP',
+            comments:[
+                {
+                    id:1,
+                    comment: 'Hello this is wrong',
+                }
+            ],
+            showComments: false
+        }
     },
-    nameOfMethod: function() {},
-
-    toggleCommentSection() {
-      this.showComments = true;
+    name: 'post',
+    props: {
+        title: String,
+        type: String,
+        audience: String,
+        content: {
+            default: 'Some content here',
+            type: String
+        },
+        id: {
+            default:0,
+            type: Number
+        }
     },
-  },
-
-  props: {
-    audience: String,
-    content: {
-      default: 'some contnet here',
-      type: String,
+    computed: {
+        isKidsEvent () {
+            if(this.audience === 'kids' && this.type === 'event') {
+                return true;
+            } else {
+                return false;
+            }
+        }
     },
-    title: String,
-    type: String,
-    id: {
-      default: 0,
-      type: Number,
-    },
-  },
+    methods: {
+        nameOfMethod: function() {},
+        otherMethod () {},
+        toggleCommentSection () {
+            this.showComments = true;
+        },
+        getCommentFromWordPress() {
+//1. Reaching out to api
+//2. Getting post from that call
+const commentFromAPI = {
+    id:3,
+    comment: 'Blah,blah,blah',
 };
+this.comments.push(commentFromAPI);
+//3.Inserting pst
+        }
+        //getting existing data from an external source- use method
+    },
+    mounted() {
+        // this.toggleCommentSection();
+        this.getCommentFromWordPress();
+    },
+    created() {},
+    destroyed() {},
+}
 </script>
-
-<style>
- h2 {
-     color: red;
- }
-</style>
+<style></style>
