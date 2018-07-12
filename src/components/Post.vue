@@ -5,7 +5,7 @@
     {{heading}}
 
     {{isKidsEvent}}
-    <p>{{content}}</p>
+    <div v-html="content"></div>
     <h3>Comments</h3>
     
         <button v-if="!showComments"
