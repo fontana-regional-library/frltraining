@@ -2,8 +2,8 @@
     <article :id="id">
         <h2>{{ title }}</h2>
 
-        <p v-if="isKidsEvent">
-            Show this only if it is a kid's event!
+        <p v-if="isYoungAdultEvent">
+            Show this only if it is a teen's event!
         </p>
 
         {{ content }}
@@ -23,8 +23,8 @@ export default {
   name: 'post',
 
   computed: {
-    isKidsEvent() {
-      if (this.audience === 'kids' && this.type === 'event') {
+    isYoungAdultEvent() {
+      if (this.audience === 'teens' && this.type === 'blog') {
         return true;
       } else {
         return false;
@@ -34,7 +34,7 @@ export default {
 
   data: () => {
     return {
-      heading: 'HelloooOoo',
+      heading: 'Hi',
       showComments: false,
       comments: [],
     };
